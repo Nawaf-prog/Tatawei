@@ -28,12 +28,24 @@ admin.initializeApp({
 const db = admin.firestore(); // Initialize Firestore
 
 // CORS setup
+const allowedOrigins = [
+  "http://localhost:3000", // Localhost for development
+  "https://coruscating-daifuku-5c856a.netlify.app", // Your Netlify app URL
+];
+
 app.use(
   cors({
-    origin: "http://localhost:3000", // Adjust according to your frontend port
-    methods: ["POST"],
+    origin: (origin, callback) => {
+      if (allowedOrigins.indexOf(origin) !== -1 || !origin) {
+        callback(null, true); // Allow the origin
+      } else {
+        callback(new Error("Not allowed by CORS"), false); // Deny other origins
+      }
+    },
+    methods: ["GET", "POST"], // Allow specific HTTP methods
   })
 );
+
 app.use(express.json());
 
 // Endpoint for schoolCode checking
