@@ -30,7 +30,7 @@ const db = admin.firestore(); // Initialize Firestore
 // CORS setup
 const allowedOrigins = [
   "http://localhost:3000", // Localhost for development
-  "https://tatawei-dashboard.netlify.app/", // Your Netlify app URL
+  "https://tatawei-dashboard.netlify.app", // Your Netlify app URL
 ];
 
 app.use(
